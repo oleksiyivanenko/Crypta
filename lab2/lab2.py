@@ -21,7 +21,7 @@ def bigrams(filename):
 
 file_in = ""
 file_out = ""
-rus_btext = "TEXT1"
+rus_text = "TEXT1"
 temp = "temp.txt"
 
 if len(sys.argv)==3:
@@ -34,4 +34,11 @@ most_used = [u'ст',u'но',u'то',u'на',u'ен']
 m = 31
 alph = {u'а':0,u'б':1,u'в':2,u'г':3,u'д':4,u'е':5,u'ж':6,u'з':7,u'и':8,u'й':9,u'к':10,u'л':11,u'м':12,u'н':13,u'о':14,u'п':15,u'р':16,u'с':17,u'т':18,u'у':19,u'ф':20,u'х':21,u'ц':22,u'ч':23,u'ш':24,u'щ':25,u'ы':26,u'ь':27,u'э':28,u'ю':29,u'я':30}
 
-bigrams(file_in)
+cypher_bi = bigrams(file_in)
+most_frequed_bi = sorted(cypher_bi.iteritems(), key=operator.itemgetter(1))[-9:]
+least_bi = sorted(bigrams(rus_text).iteritems(), key = operator.itemgetter(1))[:15]
+
+def run():
+	
+
+run()
