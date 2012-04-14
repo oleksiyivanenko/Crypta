@@ -97,14 +97,18 @@ def main():
             else:
                 plainText +=block[i]
         i += 1
-    #print plainText
-
-    myKey = u'возвращениеджинна'
-    text = dec(myKey,enc)
-    print text
-    print "key %s" % myKey
+    print plainText
+    print "Key is %s" % key
+    while key:
+        print "If text is all right press enter, oterwise enter corrected key:"
+        key = unicode(sys.stdin.readline(), 'utf-8')
+        key = key.strip()
+        if key:
+            plainText = dec(key,enc)
+            print plainText
     f = codecs.open(cracked_file,'w','utf-8')
-    f.write(text)
+    f.write(plainText)
     f.close
+    
 if __name__ == "__main__":
     main()
