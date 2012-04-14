@@ -32,7 +32,7 @@ else:
 
 most_used = [u'ст',u'но',u'то',u'на',u'ен']
 m = 31
-alph = {u'а':0,u'б':1,u'в':2,u'г':3,u'д':4,u'е':5,u'ж':6,u'з':7,u'и':8,u'й':9,u'к':10,u'л':11,u'м':12,u'н':13,u'о':14,u'п':15,u'р':16,u'с':17,u'т':18,u'у':19,u'ф':20,u'х':21,u'ц':22,u'ч':23,u'ш':24,u'щ':25,u'ы':26,u'ь':27,u'э':28,u'ю':29,u'я':30}
+alph = {u'а':0,u'б':1,u'в':2,u'г':3,u'д':4,u'е':5,u'ж':6,u'з':7,u'и':8,u'й':9,u'к':10,u'л':11,u'м':12,u'н':13,u'о':14,u'п':15,u'р':16,u'с':17,u'т':18,u'у':19,u'ф':20,u'х':21,u'ц':22,u'ч':23,u'ш':24,u'щ':25,u'ь':26,u'ы':27,u'э':28,u'ю':29,u'я':30}
 
 cypher_bi = bigrams(file_in)
 most_frequed_bi = sorted(cypher_bi.iteritems(), key = operator.itemgetter(1))[-9:]
@@ -75,7 +75,7 @@ def a_key(x1,x2,y1,y2):
 		return []
 	if yy % d == 0:
 		a.append(euclid(m*m/d,(xx)/d)[2]*(yy)/d % (m*m)/d)
-        for i in range(1,d):
+        for i in range(1,d-1):
 	    	a.append(a[i-1] + (m*m)/d)
         return a
 def b_key(x1,y1,a):
@@ -111,16 +111,17 @@ def decode(filename,a,b):
 
 def run():
 	for X in range(0,len(most_used)):
-		for XX in range(1,len(most_used)):
+		for XX in range(X+1,len(most_used)):
 			for Y in range(0,len(most_frequed_bi)):
-				for YY in range(1,len(most_frequed_bi)):
-					 a_array = a_key(most_used[X],most_used[XX],most_frequed_bi[Y][0],most_frequed_bi[YY][0])
-					 for a in a_array:
-					 	b = b_key(most_used[X],most_frequed_bi[Y][0],a)
-					 if a % m != 0:
-					 	decode(file_in,a,b)
-					 	if readable(temp) and readable_neg(temp):
-					 		print codecs.open(temp, 'r', 'utf-8').readlines()[0][:20]
+				for YY in range(0,len(most_frequed_bi)):
+					 if Y!=YY : 
+					     a_array = a_key(most_used[X],most_used[XX],most_frequed_bi[Y][0],most_frequed_bi[YY][0])
+					     for a in a_array:
+					 	    b = b_key(most_used[X],most_frequed_bi[Y][0],a)
+					     if a % m != 0:
+					 	    decode(file_in,a,b)
+					 	    if readable(temp) and readable_neg(temp):
+					 		    print "%s a = %s b = %s" % (codecs.open(temp, 'r', 'utf-8').readlines()[0][:30], a, b)
 
 
 run()
